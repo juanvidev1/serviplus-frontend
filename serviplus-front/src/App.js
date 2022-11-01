@@ -8,18 +8,18 @@ import ListadoClientes from "./componentes/clientes/TablaClientes";
 
 function App() {
   return (
-    <div className="App" >
-      <Header />
-      <div className="container mt-3 p-3">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} exact></Route>
-          <Route path="/genera-ticket" element={<ListadoClientes />} exact ></Route>
-          <Route path="/about-serviplus" element= {<FormCliente />} exact></Route>
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <div className="App" >
+        <Header />
+        <div className="container mt-3 p-3">
+          <Routes>
+            <Route path="/" element={<Landing />} exact></Route>
+            <Route path="/genera-ticket" element={<FormCliente />} exact></Route>
+            <Route path="/cliente/Formulario.js" element= {<ListadoClientes />} exact></Route>
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
