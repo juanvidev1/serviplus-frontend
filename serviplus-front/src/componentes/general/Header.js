@@ -7,7 +7,7 @@ const Header = () => {
             <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" className="nav-link px-2 text-secondary" style={{fontWeight:"700"}}>Inicio</a></li>
             <li><a href="/genera-ticket" className="nav-link px-2 text-white" style={{fontWeight:"700"}}>Genera un ticket</a></li>
-            <li><a href="/" className="nav-link px-2 text-white" style={{fontWeight:"700"}}>Acerca de ServiPlus</a></li>
+            <li><a href="/about-serviplus" className="nav-link px-2 text-white" style={{fontWeight:"700"}}>Acerca de ServiPlus</a></li>
             <li><a href="/" className="nav-link px-2 text-white" style={{fontWeight:"700"}}>Acceso empleados</a></li>
             </ul>
 

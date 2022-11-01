@@ -1,7 +1,7 @@
-import Imagenes from "../assets/img/imagenes";
+import Imagenes from "../../assets/img/imagenes";
 const Landing = () => {
     return (
-    <body>
+    <body style={{columnCount:"2"}}>
         <div className="container mt-3 p-3 d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <img src={Imagenes.img2} alt="" height={"400"} width={"500"}></img>
             <main className="form-signin w-100 m-auto">
