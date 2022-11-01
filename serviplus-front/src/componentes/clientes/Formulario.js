@@ -10,15 +10,14 @@ const FormularioCliente = () => {
                 <input className="form-control form-control-sm mb-2" />
                 <label className="me-2 mt-1 mb-1" style={{color: "#0041A3", fontWeight: "650"}}>Apellidos*</label>
                 <input className="form-control form-control-sm mb-2" />
-                <label className="me-2 mt-2 mb-2" style={{color: "#0041A3", fontWeight: "650"}}>Tipo de documento</label>
-                <select className="select select-sm mb-2">
+                <label className="me-2 mt-2" style={{color: "#0041A3", fontWeight: "650"}}>Tipo de documento*</label>
+                <select className="form-control select select-sm mt-1 mb-1">
                   <option value={""}>Seleccione una opción</option>
                   <option value={"Cédula"}>Cédula</option>
                   <option value={"Pasaporte"}>Pasaporte</option>
                   <option value={"Cédula de extranjería"}>Cédula de extranjería</option>
                   <option value={"Registro civil"}>Registro civil</option> 
                 </select>
-                <br></br>
                 <label className="me-2 mt-2 mb-1" style={{color: "#0041A3", fontWeight: "650"}}>Número de documento*</label>
                 <input className="form-control form-control-sm mb-2" />
                 <label className="me-2 mt-1 mb-1" style={{color: "#0041A3", fontWeight: "650"}}>Email*</label>
