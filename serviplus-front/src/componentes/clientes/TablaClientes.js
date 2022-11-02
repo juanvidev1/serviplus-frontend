@@ -1,7 +1,20 @@
+import { useState } from "react";
+import ClientesServicios from "../../servicios/ServicioCliente";
 import clientesServicios from "../../servicios/ServicioCliente";
 
 const ListadoClientes = () => {
-    let listadoClientes = clientesServicios.listadoClientes();
+    // let listadoClientes = clientesServicios.listadoClientes();
+    const [ clientesListado, setClientesListado ] = useState([]);
+    const [ estado, setEstado ] = useState([]);
+
+    const cargarClientes = async () => {
+        const respuesta = await ClientesServicios.listadoClientes();
+        console.log(respuesta);
+        if (respuesta.length > 0) {
+            setClientesListado
+        }
+    }
+
     return(
         <div className="container">
             <h3 className="mt-2">Clientes</h3>
