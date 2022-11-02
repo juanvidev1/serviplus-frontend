@@ -48,7 +48,11 @@ const listadoClientes = [
 const ClientesServicios = {};
 
 ClientesServicios.listadoClientes = () => {
-    return listadoClientes;
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject("Uy no se jodió esta mierda");
+        })
+    }, 2000);
 }
 
 export default ClientesServicios;

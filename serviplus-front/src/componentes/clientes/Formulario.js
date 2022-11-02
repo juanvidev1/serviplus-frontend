@@ -1,7 +1,7 @@
 import Imagenes from "../../assets/img/imagenes";
 const FormularioCliente = () => {
     return(
-      <div className="d-flex">
+      <div className="container d-flex" style={{bottom: "40px"}}>
         <div className="container m-5">
         <h1 className="mb-4" align="center" style={{color: "#0041A3", fontWeight: "900"}}>Registro de Usuario</h1>
         <form>

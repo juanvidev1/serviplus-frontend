@@ -3,6 +3,7 @@ import Header from "./componentes/general/Header";
 import Landing from "./componentes/general/Landing";
 import FormCliente from "./componentes/clientes/Formulario";
 import ListadoClientes from "./componentes/clientes/TablaClientes"; 
+import Footer from "./componentes/general/Footer";
 // import imagenes from "./assets/img/imagenes";
 
 
@@ -19,6 +20,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }
