@@ -1,4 +1,17 @@
-const listadoClientes = [
+import axios from "axios";
+
+
+const ClientesServicios = {};
+
+ClientesServicios.listarClientes = () => {
+    return axios.get("http://localhost:8080/clientes");
+}
+
+
+
+export default ClientesServicios;
+
+/*const listadoClientes = [
     {
         nombres: "Pepito",
         apellidos: "Perez",
@@ -43,16 +56,14 @@ const listadoClientes = [
         email: "juenvi@mail.com",
         direccion: null
     }
-]
+]*/
 
-const ClientesServicios = {};
 
-ClientesServicios.listadoClientes = () => {
+
+/*ClientesServicios.listadoClientes = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            reject("Uy no se jodió esta mierda");
+            resolve();
         })
     }, 2000);
-}
-
-export default ClientesServicios;
+}*/

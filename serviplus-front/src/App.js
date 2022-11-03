@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} exact></Route>
             <Route path="/genera-ticket" element={<FormCliente />} exact></Route>
-            <Route path="/cliente/Formulario.js" element= {<ListadoClientes />} exact></Route>
+            <Route path="/empleados" element= {<ListadoClientes />} exact></Route>
           </Routes>
         </div>
       </div>
