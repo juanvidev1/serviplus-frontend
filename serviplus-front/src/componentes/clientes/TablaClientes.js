@@ -7,6 +7,7 @@ const ListadoClientes = () => {
     // let listadoClientes = clientesServicios.listadoClientes();
     const [ clientesListado, setClientesListado ] = useState([]);
     const [ estado, setEstado ] = useState(Estados.CARGANDO);
+    const [ criterio, setCriterio ] = useState("");
 
     const cargarClientes = async () => {
         try {
@@ -24,10 +25,18 @@ const ListadoClientes = () => {
     }
 
     const buscarCliente = async (event) => {
+        event.preventDefault();
         try {
-            
+            const respuesta = await ClientesServicios.buscarCliente(criterio);
+            console.log(respuesta.data);
+            if (respuesta.data.length > 0) {
+                setClientesListado(respuesta.data)
+                setEstado(Estados.OK);
+            } else {
+                setEstado(Estados.VACIO);
+            }
         } catch (error) {
-            
+            setEstado(Estados.ERROR);
         }
     }
 
@@ -35,16 +44,16 @@ const ListadoClientes = () => {
         cargarClientes();
     }, [])
 
-    /*const cambiarCriterio = (event) => {
+    const cambiarCriterio = (event) => {
         setCriterio(event.target.value);
-    }*/
+    }
 
     return(
         <div className="container">
             <h3 className="mt-2">Clientes</h3>
             <form action="">
-                <input type="text" value={""} onChange={""} id="criterio" name="criterio" />
-                <button id="buscar" name="buscar" onClick={""}>Buscar</button>
+                <input type="text" value={criterio} onChange={cambiarCriterio} id="criterio" name="criterio" />
+                <button id="buscar" name="buscar" onClick={buscarCliente}>Buscar</button>
             </form>
             <table className="table table-sm">
                 <thead>
