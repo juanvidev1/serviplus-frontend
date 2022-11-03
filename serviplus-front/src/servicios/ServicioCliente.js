@@ -7,6 +7,10 @@ ClientesServicios.listarClientes = () => {
     return axios.get("http://localhost:8080/clientes");
 }
 
+ClientesServicios.buscarCliente = (criterio) => {
+    return axios.get("http://localhost:8080/clientes?q=" + criterio)
+}
+
 
 
 export default ClientesServicios;

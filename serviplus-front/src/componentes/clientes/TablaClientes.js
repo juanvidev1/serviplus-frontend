@@ -4,6 +4,37 @@ import ClientesServicios from "../../servicios/ServicioCliente";
 
 
 const ListadoClientes = () => {
+
+    // Estilos
+    const TITLE_STYLE = {
+        color: "#4972b0",
+        fontWeight: "700"
+    }
+
+    const BUSCAR_STYLE = {
+        backgroundColor: "#4972b0",
+        color: "white",
+        fontWeight: "700",
+        width: "50%"
+    }
+
+    const BUSCAR_BAR_STYLE = {
+        width: "50%"
+    }
+
+    const TABLE_HEADERS_STYLE = {
+        color: "#4972b0",
+        fontWeight: "700"
+    }
+
+    /*const DIV_CONT_STYLE = {
+        width: "100%"
+    }*/
+
+    // #0041A3 --> Color para tener en cuenta
+
+    // Funcionalidad de la tabla
+
     // let listadoClientes = clientesServicios.listadoClientes();
     const [ clientesListado, setClientesListado ] = useState([]);
     const [ estado, setEstado ] = useState(Estados.CARGANDO);
@@ -50,22 +81,22 @@ const ListadoClientes = () => {
 
     return(
         <div className="container">
-            <h3 className="mt-2">Clientes</h3>
+            <h3 className="mt-2" style={TITLE_STYLE}>Clientes</h3>
             <form action="">
-                <input type="text" value={criterio} onChange={cambiarCriterio} id="criterio" name="criterio" />
-                <button id="buscar" name="buscar" onClick={buscarCliente}>Buscar</button>
+                <input className="form-control text-bg-dark" type="search" value={criterio} onChange={cambiarCriterio} id="criterio" name="criterio" style={BUSCAR_BAR_STYLE} placeholder="Búsqueda de cliente" />
+                <button className="form-control mt-2" id="buscar" name="buscar" onClick={buscarCliente} style= {BUSCAR_STYLE}>Buscar Cliente</button>
             </form>
-            <table className="table table-sm">
-                <thead>
+            <table className="table table-sm mt-4">
+                <thead className="m-5" align="center">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Usuario</th>
-                        <th>Email</th>
-                        <th>Identificación</th>
-                        <th>Telefono</th>
+                        <th style={TABLE_HEADERS_STYLE}>Nombre</th>
+                        <th style={TABLE_HEADERS_STYLE}>Usuario</th>
+                        <th style={TABLE_HEADERS_STYLE}>Email</th>
+                        <th style={TABLE_HEADERS_STYLE}>Identificación</th>
+                        <th style={TABLE_HEADERS_STYLE}>Telefono</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody align="center">
                     { 
                         estado === Estados.CARGANDO ? (
                             <tr><td>
