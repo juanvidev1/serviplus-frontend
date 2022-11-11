@@ -1,35 +1,11 @@
 import { useEffect, useState } from "react";
 import Estados from "../../enums/Estados";
 import EmpleadosServicios from "../../servicios/ServicioEmpleado";
+import './styles/tablaEmpleados.css';
 
 
 const ListadoEmpleados = () => {
 
-    // Estilos
-    const TITLE_STYLE = {
-        color: "#4972b0",
-        fontWeight: "700"
-    }
-
-    const BUSCAR_STYLE = {
-        backgroundColor: "#4972b0",
-        color: "white",
-        fontWeight: "700",
-        width: "50%"
-    }
-
-    const BUSCAR_BAR_STYLE = {
-        width: "50%"
-    }
-
-    const TABLE_HEADERS_STYLE = {
-        color: "#4972b0",
-        fontWeight: "700"
-    }
-
-    /*const DIV_CONT_STYLE = {
-        width: "100%"
-    }*/
 
     // Funcionalidad de la tabla
     const [ empleadosListado, setEmpleadosListado ] = useState([]);
@@ -42,7 +18,7 @@ const ListadoEmpleados = () => {
             console.log(respuesta.data);
             if (respuesta.data.length > 0) {
                 setEmpleadosListado(respuesta.data);
-                setEstado(Estados.CARGANDO);
+                setEstado(Estados.OK);
             } else {
                 setEstado(Estados.VACIO);
             }
@@ -67,6 +43,18 @@ const ListadoEmpleados = () => {
         }
     }
 
+    /*const CargarEmpleado = async () => {
+        try {
+            if (id != null) {
+                const respuesta = await EmpleadosServicios.
+            } else {
+                
+            }
+        } catch (error) {
+            
+        }
+    }*/
+
     useEffect(() => {
         cargarEmpleados();
     }, [])
@@ -77,27 +65,27 @@ const ListadoEmpleados = () => {
 
     return (
         <div className="container">
-            <h2 className="mt-2" style={TITLE_STYLE}>Empleados</h2>
+            <h2 className="titulo-principal mt-2">Empleados</h2>
             <form action="">
-                <input className="form-control text-bg-dark" type="search" value={criterio} onChange={cambiarCriterio} id="criterio" name="criterio" style={BUSCAR_BAR_STYLE} />
-                <button className="form-control mt-2" id="buscar" name="buscar" onClick={buscarEmpleado} style={BUSCAR_STYLE}>Buscar empleado</button>
+                <input className="barra-busqueda form-control text-bg-dark" type="search" value={criterio} onChange={cambiarCriterio} id="criterio" name="criterio" />
+                <button className="boton-buscar form-control mt-2" id="buscar" name="buscar" onClick={buscarEmpleado}>Buscar empleado</button>
             </form>
             <table className="table table-sm mt-4">
             <thead className="m-5" align="center">
                 <tr>
-                    <th style={TABLE_HEADERS_STYLE}>Nombre</th>
-                    <th style={TABLE_HEADERS_STYLE}>Usuario</th>
-                    <th style={TABLE_HEADERS_STYLE}>Email</th>
-                    <th style={TABLE_HEADERS_STYLE}>Identificación</th>
-                    <th style={TABLE_HEADERS_STYLE}>area</th>
+                    <th className="table-headers">Nombre</th>
+                    <th className="table-headers">Usuario</th>
+                    <th className="table-headers">Email</th>
+                    <th className="table-headers">Identificación</th>
+                    <th className="table-headers">Area</th>
                 </tr>
             </thead>
             <tbody align="center">
                 {
                     estado === Estados.CARGANDO ? (
                         <tr>
-                            <td><div class="spinner-grow text-dark" role="status">
-                                <span class="visually-hidden"></span>
+                            <td><div className="spinner-grow text-dark" role="status">
+                                <span className="visually-hidden"></span>
                             </div></td>
                         </tr>
                     )
@@ -116,15 +104,18 @@ const ListadoEmpleados = () => {
                     :
 
                     empleadosListado.map((empleado) => (
-                        <tr>
+                        <tr key={empleado._id}>
                             <td>{ empleado.nombres + " " + empleado.apellidos }</td>
                             <td>{ empleado.username }</td>
                             <td>{ empleado.email }</td>
                             <td>{ empleado.identificacion }</td>
                             <td>{ empleado.area }</td>
+                            <td><button className="btn btn-sm btn-warning" >Editar</button></td>
+                            <td><button className="btn btn-sm btn-danger" >Eliminar</button></td>
                         </tr>
                     ))
                 }
+                
             </tbody>
             </table>
         </div>

@@ -1,92 +1,158 @@
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import Imagenes from '../../assets/img/imagenes';
+import './styles/HeaderStyles.css';
+import EstadoLogin from '../../enums/EstadoLogin';
+import { useContext } from 'react';
+import { useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+import { ContextoUsuario } from '../../servicios/ContextoUsuario';
+
 
 const Header = () => {
 
-    const HEADER_STYLE = {
-        backgroundColor: "#4972b0"
+    /*const location = useLocation();
+    console.log(location);*/
+
+    // const navigateTo = useNavigate();
+    const { usuario, setUsuario } = useContext(ContextoUsuario);
+
+    const revisarSesion = () => {
+        if (sessionStorage.getItem("estadoLogin") != null) {
+            const sesionUsuario = {
+                nombres: sessionStorage.getItem("nombres"),
+                EstadoLogin: parseInt(sessionStorage.getItem("estadoLogin"))
+            }
+            console.log(sesionUsuario);
+            setUsuario(sesionUsuario);
+        } else {
+            setUsuario({nombres: "", estadoLogin: EstadoLogin.NO_LOGIN});
+        }
     }
 
-    const LINKS_STYLE = {
-        fontWeight: "700"
-    }
+    /*const cerrarSesion = () => {
+        sessionStorage.clear();
+        revisarSesion();
+        navigateTo("/");
+    }*/
 
-    const HEADER_LOGO = {
-        width: "8%",
-        height: "8%",
-        opacity: ""
-    }
-
-    const location = useLocation();
-    console.log(location);
+    useEffect(() => {
+        revisarSesion();
+    }, [])
 
     return(
-    <header className="p-3 mb-5" style={HEADER_STYLE}>
+    <header className="header-landing p-0 mb-0">
         <div className="container">
+            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <img className='imagen-header' src= {Imagenes.img4} alt="" />
         
                 {
-                    location.pathname === "/" ? (
-                    <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <img src= {Imagenes.img4} alt="" style={HEADER_LOGO}/ >
+                    usuario.estadoLogin === EstadoLogin.NO_LOGIN ? (            
+                    <>
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a href="/" className="nav-link px-2 text-white" style={LINKS_STYLE}>Inicio</a></li>
-                            <li><a href="/clientes/form" className="nav-link px-2 text-white" style={LINKS_STYLE}>Genera un ticket</a></li>
-                            <li><a href="/about-serviplus" className="nav-link px-2 text-white" style={LINKS_STYLE}>Acerca de ServiPlus</a></li>
-                            <li><a href="/empleados" className="nav-link px-2 text-white" style={LINKS_STYLE}>Acceso empleados</a></li>
+                            <li><a href="/" className="link nav-link px-2 text-white">Inicio</a></li>
+                            <li><a href="/clientes/form" className="link nav-link px-2 text-white">Genera un ticket</a></li>
+                            <li><a href="/about-serviplus" className="link nav-link px-2 text-white">Acerca de ServiPlus</a></li>
+                            <li><a href="/empleados" className="link nav-link px-2 text-white">Acceso empleados</a></li>
                         </ul>
-                            <div className="text-end">
-                                <a href='/clientes/form' type='button' className='btn btn-warning'>Registrarse</a>
-                            </div>
-                    </div>
+                        <div className="text-end">
+                            <a href='/clientes/form' type='button' className='btn btn-warning'>Registrarse</a>
+                        </div>
+                    </>
+                    
                     )
 
                     :
 
-                    location.pathname === "/clientes/form" ? (
-                    <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <img src= {Imagenes.img4} alt="" style={HEADER_LOGO}/ >
-                        <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a href="/" className="nav-link px-2 text-white" style={LINKS_STYLE}>Regresar</a></li>
+                    usuario.estadoLogin === EstadoLogin.CLIENTE_LOGIN ? (
+                    <>            
+                        <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+                            <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>
                         </ul>
                         <div className="text-end">
-                                <a href='/' type='button' className='btn btn-outline-light me-2'>login</a>
+                            <span className='nombre-usuario'>{usuario.nombres}</span>
+                        </div>    
+                    </>
+                    )
+    
+                    : 
+                    
+                    usuario.estadoLogin === EstadoLogin.ADMIN_LOGIN ? (
+                    <>            
+                        <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+                            <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>
+                        </ul>
+                        <div className="text-end">
+                            <span className='nombre-usuario'>{usuario.nombres}</span>
+                        </div>    
+                    </>
+                    )
+                    
+                    :
+                    
+                    (
+                        <>
+                            <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                <li><a href="/" className="link nav-link px-2 text-white">Inicio</a></li>
+                                <li><a href="/clientes/form" className="link nav-link px-2 text-white">Genera un ticket</a></li>
+                                <li><a href="/about-serviplus" className="link nav-link px-2 text-white">Acerca de ServiPlus</a></li>
+                                <li><a href="/empleados" className="link nav-link px-2 text-white">Acceso empleados</a></li>
+                            </ul>
+                            <div className="text-end">
+                                <a href='/clientes/form' type='button' className='btn btn-warning'>Registrarse</a>
                             </div>
-                    </div>
+                        </>
+                    )
+
+                    /*location.pathname === "/clientes/form" ? (
+                    <>
+                        <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                            <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>
+                        </ul>
+                        <div className="text-end">
+                            <a href='/' type='button' className='btn btn-outline-light me-2'>login</a>
+                        </div> 
+                    </>
                     )
 
                     :
 
                     location.pathname === "/empleados" ? (
-                    <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <img src= {Imagenes.img4} alt="" style={HEADER_LOGO}/ >
-                        <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a href="/" className="nav-link px-2 text-white" style={LINKS_STYLE}>Regresar</a></li>
-                        </ul>
-                    </div>
+                    <header className="header-empleados p-3 mb-0">
+                        <div className="container">
+                            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                                <img className='imagen-header' src= {Imagenes.img4} alt="" />
+                                <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                    <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </header>
                     )
 
                     :
 
                     location.pathname === "/about-serviplus" ? (
-                    <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <img src= {Imagenes.img4} alt="" style={HEADER_LOGO}/ >
-                        <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a href="/" className="nav-link px-2 text-white" style={LINKS_STYLE}>Regresar</a></li>
-                            <li><a href="/empleados" className="nav-link px-2 text-white" style={LINKS_STYLE}>Empleados</a></li>
-                        </ul>
-                        <div className='text-end'>
-                            <a href='/' type='button' className='btn btn-outline-light me-2'>Login</a>
-                            <a href='/clientes/form' type='button' className='btn btn-warning'>Registro</a>
+                    <header className="header-about-sv p-3 mb-0">
+                        <div className="container">
+                            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                                <img className='imagen-header' src= {Imagenes.img4} alt="" />
+                                <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                    <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>
+                                    <li><a href="/empleados" className="link nav-link px-2 text-white">Empleados</a></li>
+                                </ul>
+                                <div className='text-end'>
+                                    <a href='/' type='button' className='btn btn-outline-light me-2'>Login</a>
+                                    <a href='/clientes/form' type='button' className='btn btn-warning'>Registro</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </header>        
                     )
 
-                    :
-
-                    ""
+                    :*/
                 }
 
-            
+           </div> 
         </div>
     </header>
     );

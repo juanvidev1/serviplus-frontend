@@ -58,7 +58,7 @@ const ListadoClientes = () => {
     const buscarCliente = async (event) => {
         event.preventDefault();
         try {
-            const respuesta = await ClientesServicios.buscarCliente(criterio);
+            const respuesta = await ClientesServicios.buscarClientes(criterio);
             console.log(respuesta.data);
             if (respuesta.data.length > 0) {
                 setClientesListado(respuesta.data)
@@ -100,8 +100,8 @@ const ListadoClientes = () => {
                     { 
                         estado === Estados.CARGANDO ? (
                             <tr><td>
-                                <div class="spinner-border text-secondary" role="status">
-                                    <span class="sr-only"></span>
+                                <div className="spinner-border text-secondary" role="status">
+                                    <span className="sr-only"></span>
                                 </div>
                             </td></tr>
                         )
@@ -111,8 +111,12 @@ const ListadoClientes = () => {
                         
                         :
 
+                        estado === Estados.VACIO ? (<tr><td>No hay datos</td></tr>)
+
+                        :
+
                         clientesListado.map((cliente) => (
-                            <tr>
+                            <tr key={cliente._id}>
                                 <td>{ cliente.nombres + " " + cliente.apellidos }</td>
                                 <td>{cliente.username}</td>
                                 <td>{cliente.email}</td>

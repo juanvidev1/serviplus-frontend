@@ -2,27 +2,39 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./componentes/general/Header";
 import Landing from "./componentes/general/Landing";
 import FormCliente from "./componentes/clientes/Formulario";
-// import ListadoClientes from "./componentes/clientes/TablaClientes";
-import ListadoEmpleados from "./componentes/empleados/TablaEmpleados"; 
+import ListadoClientes from "./componentes/clientes/TablaClientes";
+import ListadoEmpleados from "./componentes/empleados/TablaEmpleados";
+import LoginEmpleados from "./componentes/empleados/EmpleadosLogin"; 
 import Footer from "./componentes/general/Footer";
+// import ClienteDashboard from "./componentes/clientes/Dashboard";
+import { useState } from "react";
+import { ContextoUsuario } from "./servicios/ContextoUsuario";
+import AdminDashboard from "./componentes/empleados/AdminDashboard";
 // import imagenes from "./assets/img/imagenes";
 
 
 function App() {
+
+  const [usuario, setUsuario] = useState({nombres: "", estadoLogin: 0});
+
   return (
     <BrowserRouter>
-      <div className="App" >
+      <ContextoUsuario.Provider value={{usuario, setUsuario}}>
+        <div className="App" >
         <Header />
-        <div className="container mt-3 p-3">
-          <Routes>
-            <Route path="/" element={<Landing />} exact></Route>
-            <Route path="/clientes/form" element={<FormCliente />} exact></Route>
-            <Route path="/empleados" element= {<ListadoEmpleados />} exact></Route>
-            <Route path="/clientes/form" element= {<FormCliente />} exact></Route>
-          </Routes>
+            
+         <Routes>
+           <Route path="/" element={<Landing />} exact></Route>
+           <Route path="/clientes/form" element={<FormCliente />} exact></Route>
+           <Route path="/empleados" element= {<LoginEmpleados /> } exact></Route>
+           <Route path="/clientes/form" element= {<FormCliente />} exact></Route>
+           <Route path="/adminDashboard" element= {<AdminDashboard />} exact></Route>
+           <Route path="/tablaclientes" element={<ListadoClientes />} exact></Route>
+           <Route path="/tablaempleados" element={<ListadoEmpleados />} exact></Route>
+         </Routes>     
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </ContextoUsuario.Provider>
     </BrowserRouter>
   );
 }

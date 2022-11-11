@@ -7,8 +7,16 @@ ClientesServicios.listarClientes = () => {
     return axios.get("http://localhost:8080/clientes");
 }
 
-ClientesServicios.buscarCliente = (criterio) => {
-    return axios.get("http://localhost:8080/clientes?q=" + criterio)
+ClientesServicios.buscarClientes = (criterio) => {
+    return axios.get("http://localhost:8080/clientes?q=" + criterio);
+}
+
+ClientesServicios.buscarCliente = (id) => {
+    return axios.get("http://localhost:8080/clientes/" + id);
+}
+
+ClientesServicios.guardarCliente = (cliente) => {
+    return axios.post("http://localhost:8080/clientes", cliente);
 }
 
 
