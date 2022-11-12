@@ -6,11 +6,11 @@ import ListadoClientes from "./componentes/clientes/TablaClientes";
 import ListadoEmpleados from "./componentes/empleados/TablaEmpleados";
 import LoginEmpleados from "./componentes/empleados/EmpleadosLogin"; 
 import Footer from "./componentes/general/Footer";
-// import ClienteDashboard from "./componentes/clientes/Dashboard";
+import ClienteDashboard from "./componentes/clientes/Dashboard";
 import { useState } from "react";
 import { ContextoUsuario } from "./servicios/ContextoUsuario";
 import AdminDashboard from "./componentes/empleados/AdminDashboard";
-// import imagenes from "./assets/img/imagenes";
+import ClienteTicketForm from "./componentes/clientes/ClienteTicketForm";
 
 
 function App() {
@@ -31,6 +31,8 @@ function App() {
            <Route path="/adminDashboard" element= {<AdminDashboard />} exact></Route>
            <Route path="/tablaclientes" element={<ListadoClientes />} exact></Route>
            <Route path="/tablaempleados" element={<ListadoEmpleados />} exact></Route>
+           <Route path="/clienteDashboard" element={<ClienteDashboard />} exact></Route>
+           <Route path="/clienteticketform" element={<ClienteTicketForm />} exact></Route>
          </Routes>     
         </div>
         <Footer />
