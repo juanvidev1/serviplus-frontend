@@ -1,25 +1,32 @@
 import axios from "axios";
+import baseURL from "../config";
 
 
 const ClientesServicios = {};
 
 ClientesServicios.listarClientes = () => {
-    return axios.get("http://localhost:8080/clientes");
+    return axios.get(baseURL + "/clientes");
 }
 
 ClientesServicios.buscarClientes = (criterio) => {
-    return axios.get("http://localhost:8080/clientes?q=" + criterio);
+    return axios.get(baseURL + "/clientes?q=" + criterio);
 }
 
 ClientesServicios.buscarCliente = (id) => {
-    return axios.get("http://localhost:8080/clientes/" + id);
+    return axios.get(baseURL + "/clientes/" + id);
 }
 
 ClientesServicios.guardarCliente = (cliente) => {
-    return axios.post("http://localhost:8080/clientes", cliente);
+    return axios.post(baseURL + "/clientes", cliente);
 }
 
+ClientesServicios.actualizarCliente = (id, cliente) => {
+    return axios.put(baseURL + "/clientes" + id, cliente);
+}
 
+ClientesServicios.eliminarCliente = (id) => {
+    return axios.put(baseURL + "/clientes" + id);
+}
 
 export default ClientesServicios;
 
