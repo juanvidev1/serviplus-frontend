@@ -28,6 +28,7 @@ function App() {
            <Route path="/clientes/form" element={<FormCliente />} exact></Route>
            <Route path="/empleados" element= {<LoginEmpleados /> } exact></Route>
            <Route path="/clientes/form" element= {<FormCliente />} exact></Route>
+           <Route path="/clientes/form/:id" element= {<FormCliente />} exact></Route>
            <Route path="/adminDashboard" element= {<AdminDashboard />} exact></Route>
            <Route path="/tablaclientes" element={<ListadoClientes />} exact></Route>
            <Route path="/tablaempleados" element={<ListadoEmpleados />} exact></Route>

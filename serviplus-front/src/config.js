@@ -1,3 +1,3 @@
-const baseURL = "http://localhost:8080";
+const baseURL = "https://serviplusprojectbackend.herokuapp.com";
 
 export default baseURL;

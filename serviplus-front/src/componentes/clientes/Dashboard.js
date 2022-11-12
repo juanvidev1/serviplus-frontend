@@ -1,6 +1,4 @@
 import Sidebar from "../general/SidebarClientes";
-// import ContenidoDashCliente from "./ClienteDashboard";
-import FormularioCliente from './Formulario';
 
 const DashboardCliente = () => {
   // Estilos
@@ -18,7 +16,7 @@ const DashboardCliente = () => {
           <Sidebar />
       </div>
       <div className="container m-5">
-          <FormularioCliente />
+          Hola mundo
       </div>
     </div>
   );

@@ -1,8 +1,11 @@
 import './styles/formulario.css';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Imagenes from "../../assets/img/imagenes";
 import ClientesServicios from "../../servicios/ServicioCliente";
+import { useContext } from 'react';
+import { ContextoUsuario } from '../../servicios/ContextoUsuario';
+import EstadosLogin from '../../enums/EstadoLogin';
 
 
 
@@ -35,9 +38,10 @@ const FormularioCliente = () => {
     }
 
     // Funcionalidad
-
+    const { id } = useParams();
     const navigateTo = useNavigate();
 
+    // const [ idCargar, setIdCargar] = useState("");
     const [ nombres, setNombres ] = useState("");
     const [ apellidos, setApellidos ] = useState("");
     const [ username, setUsername ] = useState("");
@@ -51,6 +55,25 @@ const FormularioCliente = () => {
     const [ departamento, setDepartamento ] = useState("");
     const [ ciudad, setCiudad ] = useState("")
     const [ mensaje, setMensaje ] = useState("");
+    const [ titulo, setTitulo ] = useState("");
+    const { usuario, setUsuario } = useContext(ContextoUsuario);
+
+    const revisarSesion = () => {
+      if (sessionStorage.getItem("estadoLogin") != null) {
+          const sesionUsuario = {
+              id: sessionStorage.getItem("id"),
+              nombres: sessionStorage.getItem("nombres"),
+              EstadoLogin: parseInt(sessionStorage.getItem("estadoLogin"))
+          }
+          console.log(sesionUsuario);
+          console.log(usuario);
+          setUsuario(sesionUsuario);
+      } else {
+          setUsuario({nombres: "", estadoLogin: EstadosLogin.NO_LOGIN});
+      }
+    }
+
+    console.log(usuario);
  
     const guardarCliente = async (event) => {
       event.preventDefault();
@@ -79,25 +102,37 @@ const FormularioCliente = () => {
       }
     }
 
-    /*const cargarCliente = async () => {
+   const cargarCliente = async () => {
       try {
         if (id != null) {
           const respuesta = await ClientesServicios.buscarCliente(id);
+          console.log(respuesta.data);
           if (respuesta.data != null) {
-            console.log(respuesta.data);
-            
-          } else {
-            
+            setNombres(respuesta.data.nombres);
+            setApellidos(respuesta.data.apellidos);
+            setUsername(respuesta.data.username);
+            setPassword(respuesta.data.password);
+            setPasswordConfirm(respuesta.data.password);
+            setIdentificacion(respuesta.data.identificacion);
+            setTipo_identificacion(respuesta.data.tipo_identificacion);
+            setTelefono(respuesta.data.telefono);
+            setEmail(respuesta.data.email);
+            setDireccion(respuesta.data.direccion);
           }
-  
+          setTitulo("Edita tus datos");
         } else {
-          
+          setTitulo("Registra tus datos");
         }
       } catch (error) {
-        
+        console.log("Ocurrió un error " + error);
       }
-    }*/
-    
+    }
+
+    useEffect(() => {
+      revisarSesion();
+      cargarCliente();
+    }, []);
+
     const cambiarNombres = (event) => {
       setNombres(event.target.value)
     }
@@ -149,7 +184,7 @@ const FormularioCliente = () => {
     return(
       <div className="div-principal container d-flex">
         <div className="container m-5">
-        <h1 className="titulo-principal mb-4" align="center">Registro de Usuario</h1>
+        <h1 className="titulo-principal mb-4" align="center">{titulo}</h1>
         <form>
             <div className="form-control form-control-sm mb-2">
                 <label className="etiquetas me-2 mt-1 mb-1" htmlFor="nombres">Nombres*</label>

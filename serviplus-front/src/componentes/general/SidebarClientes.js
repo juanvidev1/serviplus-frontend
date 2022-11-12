@@ -16,7 +16,8 @@ const Sidebar = () => {
       if (sessionStorage.getItem("estadoLogin") != null) {
           const sesionUsuario = {
               nombres: sessionStorage.getItem("nombres"),
-              EstadoLogin: parseInt(sessionStorage.getItem("estadoLogin"))
+              estadoLogin: parseInt(sessionStorage.getItem("estadoLogin")),
+              id: sessionStorage.getItem("id")
           }
           console.log(sesionUsuario);
           console.log(usuario);
@@ -42,7 +43,7 @@ const Sidebar = () => {
         align="center"
       >
         <div className="m-0" align="center">
-          <img src={Imagenes.img4} alt="" width="200" height="200" />
+          <img className="bi bi-person-circle heading" src={Imagenes.usuarioicon} height="150" width="150"></img>
         </div>
         <div className="flex-row mt-2 mb-2" align="center">
           {
@@ -77,7 +78,7 @@ const Sidebar = () => {
         </div>
         <div className="flex-row">
           <div className="mt-5 p-5" align="center">
-            <img src={Imagenes.exiticon} alt="" width="30" height="30" />
+            <img className="me-2" src={Imagenes.exiticon} alt="" width="35" height="40" />
             <button
               type="button"
               className="btn btn-dark"

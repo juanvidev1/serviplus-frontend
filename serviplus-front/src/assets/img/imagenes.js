@@ -9,11 +9,12 @@ import google from "./googlelogo.png";
 import instagram from "./instagramlogo.png";
 import linkedin from "./linkedinlogo.png";
 import twitter from "./twitterlogo.png";
-import exiticon from "./exitlicon.png";
+import exiticon from "./door-open-fill.svg";
 import boxicon from "./cubeicon.png";
 import ticket1 from "./ticketicon.svg";
 import ticket2 from "./ticket2icon.svg";
 import dashcliente from "./dashcliente.svg";
+import usuarioicon from "./person-circle.svg";
 
 const Imagenes = {
     "img1": logo,
@@ -31,7 +32,8 @@ const Imagenes = {
     "cubeicon": boxicon,
     "ticket1": ticket1,
     "ticket2": ticket2,
-    "dashcliente": dashcliente
+    "dashcliente": dashcliente,
+    "usuarioicon": usuarioicon
 }
 
 export default Imagenes;

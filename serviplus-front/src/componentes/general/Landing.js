@@ -16,6 +16,7 @@ const Landing = () => {
     const { usuario, setUsuario } = useContext(ContextoUsuario);
 
     const crearSesion = (datosPerfil) => {
+        sessionStorage.setItem("id", datosPerfil.id);
         sessionStorage.setItem("nombres", datosPerfil.nombres);
         sessionStorage.setItem("estadoLogin", datosPerfil.estadoLogin);
         setUsuario(datosPerfil);
@@ -39,7 +40,7 @@ const Landing = () => {
             console.log(datosPerfil);
             crearSesion(datosPerfil);
             if (datosPerfil.estadoLogin === EstadosLogin.CLIENTE_LOGIN) {
-                navigateTo("/clientes/form");
+                navigateTo("/clientes/form/" + datosPerfil.id);
             } else {
                 navigateTo("/");
             }
