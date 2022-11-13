@@ -1,6 +1,6 @@
 import Imagenes from "../../assets/img/imagenes";
 import './styles/SideBar.css'
-import EstadoLogin from '../../enums/EstadoLogin';
+import EstadosLogin from '../../enums/EstadoLogin';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ const Sidebar = () => {
           console.log(usuario);
           setUsuario(sesionUsuario);
       } else {
-          setUsuario({nombres: "", estadoLogin: EstadoLogin.NO_LOGIN});
+          setUsuario({nombres: "", estadoLogin: EstadosLogin.NO_LOGIN});
       }
   }
 
@@ -43,11 +43,11 @@ const Sidebar = () => {
         align="center"
       >
         <div className="m-0" align="center">
-          <img className="bi bi-person-circle heading" src={Imagenes.usuarioicon} height="150" width="150"></img>
+          <img className="bi bi-person-circle heading" src={Imagenes.usuarioicon} alt="" height="150" width="150"></img>
         </div>
         <div className="flex-row mt-2 mb-2" align="center">
           {
-            usuario.estadoLogin === EstadoLogin.ADMIN_LOGIN ? (
+            usuario.estadoLogin === EstadosLogin.ADMIN_LOGIN ? (
               <ul className="list-unstyled">
                 <li><a href="/asesores" type="button" className="btn btn-md btn-warning mt-3 mb-3">Empleados</a></li>
                 <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Tickets</a></li>
@@ -55,7 +55,7 @@ const Sidebar = () => {
               </ul>
             )
             :
-            usuario.estadoLogin === EstadoLogin.ASESOR_LOGIN ? (
+            usuario.estadoLogin === EstadosLogin.ASESOR_LOGIN ? (
               <ul className="list-unstyled">
                 <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Editar perfil</a></li>
                 <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Listar mis tickets</a></li>
@@ -63,9 +63,9 @@ const Sidebar = () => {
               </ul>
             )
             :
-            usuario.estadoLogin === EstadoLogin.CLIENTE_LOGIN ? (
+            usuario.estadoLogin === EstadosLogin.CLIENTE_LOGIN ? (
               <ul className="list-unstyled">
-                <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Editar perfil</a></li>
+                <li><a href={"/clientes/form/" + usuario.id} type="button" className="btn btn-md btn-warning mt-3 mb-3">Editar datos</a></li>
                 <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Listar mis tickets</a></li>
                 <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Crear un ticket</a></li>
               </ul>

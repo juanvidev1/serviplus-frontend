@@ -1,7 +1,7 @@
 // import { useLocation } from 'react-router-dom';
 import Imagenes from '../../assets/img/imagenes';
 import './styles/HeaderStyles.css';
-import EstadoLogin from '../../enums/EstadoLogin';
+import EstadosLogin from '../../enums/EstadoLogin';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ const Header = () => {
             console.log(sesionUsuario);
             setUsuario(sesionUsuario);
         } else {
-            setUsuario({nombres: "", estadoLogin: EstadoLogin.NO_LOGIN});
+            setUsuario({nombres: "", estadoLogin: EstadosLogin.NO_LOGIN});
         }
     }
 
@@ -46,7 +46,7 @@ const Header = () => {
             <img className='imagen-header' src= {Imagenes.img4} alt="" />
         
                 {
-                    usuario.estadoLogin === EstadoLogin.NO_LOGIN ? (            
+                    usuario.estadoLogin === EstadosLogin.NO_LOGIN ? (            
                     <>
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                             <li><a href="/" className="link nav-link px-2 text-white">Inicio</a></li>
@@ -63,10 +63,10 @@ const Header = () => {
 
                     :
 
-                    usuario.estadoLogin === EstadoLogin.CLIENTE_LOGIN ? (
+                    usuario.estadoLogin === EstadosLogin.CLIENTE_LOGIN ? (
                     <>            
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                            <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>
+                            <li><a href="/clienteDashboard" className="link nav-link px-2 text-white">Regresar</a></li>
                         </ul>
                         <div className="text-end">
                             <span className='nombre-usuario'>{usuario.nombres}</span>
@@ -76,7 +76,7 @@ const Header = () => {
     
                     : 
                     
-                    usuario.estadoLogin === EstadoLogin.ADMIN_LOGIN ? (
+                    usuario.estadoLogin === EstadosLogin.ADMIN_LOGIN ? (
                     <>            
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
                             <li><a href="/" className="link nav-link px-2 text-white">Regresar</a></li>

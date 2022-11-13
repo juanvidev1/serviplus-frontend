@@ -18,6 +18,9 @@ const Landing = () => {
     const crearSesion = (datosPerfil) => {
         sessionStorage.setItem("id", datosPerfil.id);
         sessionStorage.setItem("nombres", datosPerfil.nombres);
+        sessionStorage.setItem("email", datosPerfil.email);
+        sessionStorage.setItem("username", datosPerfil.username);
+        sessionStorage.setItem("identificacion", datosPerfil.identificacion);
         sessionStorage.setItem("estadoLogin", datosPerfil.estadoLogin);
         setUsuario(datosPerfil);
     }
@@ -35,12 +38,15 @@ const Landing = () => {
             const datosPerfil = {
                 id: result.data.id,
                 nombres: result.data.nombres,
+                email: result.data.email,
+                username: result.data.username,
+                identificacion: result.data.identificacion,
                 estadoLogin: EstadosLogin.CLIENTE_LOGIN
             }
             console.log(datosPerfil);
             crearSesion(datosPerfil);
             if (datosPerfil.estadoLogin === EstadosLogin.CLIENTE_LOGIN) {
-                navigateTo("/clientes/form/" + datosPerfil.id);
+                navigateTo("/clienteDashboard");
             } else {
                 navigateTo("/");
             }

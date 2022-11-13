@@ -40,17 +40,18 @@ const ContenidoDashCliente = () => {
         >
           <img alt="" src={Imagenes.ticket1} width="50" height="50" />
           <br />
-          <button
+          <a
             className="btn mt-3"
+            type="button"
             style={{
               backgroundColor: "#4972b0",
               color: "white",
               fontWeight: "700",
             }}
-            href="/"
+            href="/clienteticketform"
           >
             Generar Ticket
-          </button>
+          </a>
         </div>
       </div>
       <div className="container col-6 ms-4 m-2" align="center">
