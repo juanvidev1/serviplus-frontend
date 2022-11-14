@@ -1,15 +1,40 @@
 import { useNavigate } from "react-router-dom";
 import Imagenes from "../../assets/img/imagenes";
+import { useEffect } from "react";
+import { ContextoUsuario } from "../../servicios/ContextoUsuario";
+import { useContext } from "react";
+import EstadosLogin from "../../enums/EstadoLogin";
 
 const ContenidoDashCliente = () => {
 
   const navigateTo = useNavigate();
+  const { usuario, setUsuario } = useContext(ContextoUsuario);
+
+  const revisarSesion = () => {
+      if (sessionStorage.getItem("estadoLogin") != null) {
+          const sesionUsuario = {
+              nombres: sessionStorage.getItem("nombres"),
+              estadoLogin: parseInt(sessionStorage.getItem("estadoLogin")),
+              id: sessionStorage.getItem("id")
+          }
+          console.log(usuario);
+          setUsuario(sesionUsuario);
+      } else {
+          setUsuario({nombres: "", estadoLogin: EstadosLogin.NO_LOGIN});
+      }
+  }
+
+  useEffect(() => {
+    revisarSesion();
+  }, [])
 
   const crearTicket =() => {
+    revisarSesion();
     navigateTo("/clienteticketform");
   }
 
   const listarTickets = () => {
+    revisarSesion();
     navigateTo("/ticketscliente");
   }
 
