@@ -1,6 +1,6 @@
 import './styles/formulario.css';
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Imagenes from "../../assets/img/imagenes";
 import ClientesServicios from "../../servicios/ServicioCliente";
 import { useContext } from 'react';
@@ -41,7 +41,6 @@ const FormularioCliente = () => {
     const { id } = useParams();
     const navigateTo = useNavigate();
 
-    // const [ idCargar, setIdCargar] = useState("");
     const [ nombres, setNombres ] = useState("");
     const [ apellidos, setApellidos ] = useState("");
     const [ username, setUsername ] = useState("");
@@ -50,12 +49,13 @@ const FormularioCliente = () => {
     const [ identificacion, setIdentificacion ] = useState("");
     const [ tipo_identificacion, setTipo_identificacion ] = useState("");
     const [ telefono, setTelefono ] = useState("")
-    const [ email, setEmail ] = useState();
+    const [ email, setEmail ] = useState("");
     const [ direccion, setDireccion ] = useState("");
     const [ departamento, setDepartamento ] = useState("");
     const [ ciudad, setCiudad ] = useState("")
     const [ mensaje, setMensaje ] = useState("");
     const [ titulo, setTitulo ] = useState("");
+    const [ boton, setBoton ] = useState("");
     const { usuario, setUsuario } = useContext(ContextoUsuario);
 
     const revisarSesion = () => {
@@ -65,15 +65,12 @@ const FormularioCliente = () => {
               nombres: sessionStorage.getItem("nombres"),
               EstadoLogin: parseInt(sessionStorage.getItem("estadoLogin"))
           }
-          console.log(sesionUsuario);
-          console.log(usuario);
           setUsuario(sesionUsuario);
       } else {
           setUsuario({nombres: "", estadoLogin: EstadosLogin.NO_LOGIN});
       }
     }
 
-    console.log(usuario);
  
     const guardarCliente = async (event) => {
       event.preventDefault();
@@ -91,9 +88,15 @@ const FormularioCliente = () => {
             email: email,
             direccion: direccion 
           }
-          console.log(cliente);
-          await ClientesServicios.guardarCliente(cliente);
-          navigateTo("/");
+          if (usuario.id != null) {
+            console.log(cliente);
+            console.log(usuario.id);
+            await ClientesServicios.actualizarCliente(usuario.id, cliente);
+            navigateTo("/clienteDashboard") 
+          } else {
+            await ClientesServicios.guardarCliente(cliente);
+            navigateTo("/");
+          }
         } catch (error) {
           setMensaje("Ocurrió un error " + error);
         }
@@ -108,20 +111,22 @@ const FormularioCliente = () => {
           const respuesta = await ClientesServicios.buscarCliente(id);
           console.log(respuesta.data);
           if (respuesta.data != null) {
-            setNombres(respuesta.data.nombres);
-            setApellidos(respuesta.data.apellidos);
-            setUsername(respuesta.data.username);
-            setPassword(respuesta.data.password);
-            setPasswordConfirm(respuesta.data.password);
-            setIdentificacion(respuesta.data.identificacion);
-            setTipo_identificacion(respuesta.data.tipo_identificacion);
-            setTelefono(respuesta.data.telefono);
-            setEmail(respuesta.data.email);
-            setDireccion(respuesta.data.direccion);
-          }
-          setTitulo("Edita tus datos");
+              setNombres(respuesta.data.nombres);
+              setApellidos(respuesta.data.apellidos);
+              setUsername(respuesta.data.username);
+              setPassword(respuesta.data.password);
+              setPasswordConfirm(respuesta.data.password);
+              setIdentificacion(respuesta.data.identificacion);
+              setTipo_identificacion(respuesta.data.tipo_identificacion);
+              setTelefono(respuesta.data.telefono);
+              setEmail(respuesta.data.email);
+              setDireccion(respuesta.data.direccion);
+            }
+            setTitulo("Edita tus datos");
+            setBoton("Actualizar mis datos");
         } else {
           setTitulo("Registra tus datos");
+          setBoton("Guardar mis datos");
         }
       } catch (error) {
         console.log("Ocurrió un error " + error);
@@ -246,7 +251,7 @@ const FormularioCliente = () => {
                   </div>
                   
                   <div className="me-2 mt-1 mb-1" align="center">
-                    <button onClick={guardarCliente} className="btn" style={BUTTON_STYLE} id="registro" name="registro">Registrarme</button>
+                    <button onClick={guardarCliente} className="btn" style={BUTTON_STYLE} id="registro" name="registro">{boton}</button>
                   </div>
                   <div id="mensaje">{mensaje}</div>
                   

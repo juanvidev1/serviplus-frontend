@@ -4,7 +4,7 @@ import './styles/HeaderStyles.css';
 import EstadosLogin from '../../enums/EstadoLogin';
 import { useContext } from 'react';
 import { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ContextoUsuario } from '../../servicios/ContextoUsuario';
 
 
@@ -13,7 +13,7 @@ const Header = () => {
     /*const location = useLocation();
     console.log(location);*/
 
-    // const navigateTo = useNavigate();
+    const navigateTo = useNavigate();
     const { usuario, setUsuario } = useContext(ContextoUsuario);
 
     const revisarSesion = () => {
@@ -29,11 +29,10 @@ const Header = () => {
         }
     }
 
-    /*const cerrarSesion = () => {
-        sessionStorage.clear();
+    const volverCliente = () => {
         revisarSesion();
-        navigateTo("/");
-    }*/
+        navigateTo("/clienteDashboard");
+    }
 
     useEffect(() => {
         revisarSesion();
@@ -66,7 +65,7 @@ const Header = () => {
                     usuario.estadoLogin === EstadosLogin.CLIENTE_LOGIN ? (
                     <>            
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-                            <li><a href="/clienteDashboard" className="link nav-link px-2 text-white">Regresar</a></li>
+                            <li><button type="text" onClick={volverCliente} className="regresar-boton px-2 text-white">Regresar</button></li>
                         </ul>
                         <div className="text-end">
                             <span className='nombre-usuario'>{usuario.nombres}</span>

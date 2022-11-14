@@ -7,10 +7,13 @@ import ListadoEmpleados from "./componentes/empleados/TablaEmpleados";
 import LoginEmpleados from "./componentes/empleados/EmpleadosLogin"; 
 import Footer from "./componentes/general/Footer";
 import ClienteDashboard from "./componentes/clientes/Dashboard";
+import DbEditarDatosCliente from "./componentes/clientes/Dashboard2";
 import { useState } from "react";
 import { ContextoUsuario } from "./servicios/ContextoUsuario";
 import AdminDashboard from "./componentes/empleados/AdminDashboard";
-import ClienteTicketForm from "./componentes/clientes/ClienteTicketForm";
+import TarjetaTicketCliente from "./componentes/clientes/TarjetaTicketCliente";
+import DbTicketsCliente from "./componentes/clientes/Dashboard3";
+import DbCrearTicket from "./componentes/clientes/Dashboard4";
 
 
 function App() {
@@ -32,8 +35,10 @@ function App() {
            <Route path="/tablaclientes" element={<ListadoClientes />} exact></Route>
            <Route path="/tablaempleados" element={<ListadoEmpleados />} exact></Route>
            <Route path="/clienteDashboard" element={<ClienteDashboard />} exact></Route>
-           <Route path="/clientes/form/:id" element= {<FormCliente />} exact></Route>
-           <Route path="/clienteticketform" element={<ClienteTicketForm />} exact></Route>
+           <Route path="/clientes/form/:id" element= {<DbEditarDatosCliente />} exact></Route>
+           <Route path="/clienteticketform" element={<DbCrearTicket />} exact></Route>
+           <Route path="/ticketscliente" element={<DbTicketsCliente />} exact></Route>
+           <Route path="/pruebascomponentes" element={<TarjetaTicketCliente />} exact></Route>
          </Routes>     
         </div>
         <Footer />

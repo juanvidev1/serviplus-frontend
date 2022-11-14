@@ -29,7 +29,6 @@ const ClienteTicketForm = () => {
                 identificacion: sessionStorage.getItem("identificacion"),
                 email: sessionStorage.getItem("email"),
             }
-            console.log(sesionUsuario);
             setUsuario(sesionUsuario);
             setNombreCliente(sesionUsuario.nombres);
             setUsername(sesionUsuario.username);
@@ -40,19 +39,12 @@ const ClienteTicketForm = () => {
         }
     }
 
-    console.log(nombreCliente);
-    console.log(username);
-    console.log(email);
-    console.log(identificacion);
-
-    /*useEffect(() => {
-      
-    }, [])*/
 
     const crearTicket = async (event) => {
         event.preventDefault();
         try {
             const ticket = {
+                fecha: Date.now(),
                 servicio: {
                     nombre: nombreServicio,
                     descripcion: descripcionServicio,
@@ -65,13 +57,15 @@ const ClienteTicketForm = () => {
                 },
                 estado_ticket: "Solicitado"
             }
-            console.log(ticket);
             await TicketsServicios.crearTicket(ticket);
-            // navigateTo("/clienteDashboard")
         } catch (error) {
             console.log(error);
             setMensaje(error);
         }
+    }
+
+    const volver = () => {
+        navigateTo("/clienteDashboard")
     }
 
     useEffect(() => {
@@ -121,7 +115,7 @@ const ClienteTicketForm = () => {
                             Puedes consultar el ticket con tu número de identificación {identificacion}
                         </div>
                         <div className='modal-footer'>
-                            <a href='/clienteDashboard' type='button' className='btn btn-primary'>Volver</a>
+                            <button onClick={volver} type='button' className='btn btn-primary'>Volver</button>
                         </div>
                     </div>
                 </div>

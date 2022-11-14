@@ -1,7 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Imagenes from "../../assets/img/imagenes";
 
 const ContenidoDashCliente = () => {
-    return (<div className="container m-5">
+
+  const navigateTo = useNavigate();
+
+  const crearTicket =() => {
+    navigateTo("/clienteticketform");
+  }
+
+  const listarTickets = () => {
+    navigateTo("/ticketscliente");
+  }
+
+  return (<div className="container m-5">
     <div
       className="container col-12 ms-4 shadow p-3 mb-5 bg-body rounded"
       align="center"
@@ -40,7 +52,7 @@ const ContenidoDashCliente = () => {
         >
           <img alt="" src={Imagenes.ticket1} width="50" height="50" />
           <br />
-          <a
+          <button
             className="btn mt-3"
             type="button"
             style={{
@@ -48,10 +60,10 @@ const ContenidoDashCliente = () => {
               color: "white",
               fontWeight: "700",
             }}
-            href="/clienteticketform"
+            onClick={crearTicket}
           >
             Generar Ticket
-          </a>
+          </button>
         </div>
       </div>
       <div className="container col-6 ms-4 m-2" align="center">
@@ -68,7 +80,7 @@ const ContenidoDashCliente = () => {
               color: "white",
               fontWeight: "700",
             }}
-            href="/"
+            onClick={listarTickets}
           >
             Mis Tickets
           </button>

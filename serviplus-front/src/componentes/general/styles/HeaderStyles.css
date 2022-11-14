@@ -16,3 +16,10 @@
     width: 8%;
     height: 8%;
 }
+
+.regresar-boton {
+    background-color: #4972b0;
+    color: aliceblue;
+    font-weight: 700;
+    border: 0;
+}

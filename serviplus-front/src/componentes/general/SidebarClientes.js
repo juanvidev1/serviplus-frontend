@@ -17,10 +17,9 @@ const Sidebar = () => {
           const sesionUsuario = {
               nombres: sessionStorage.getItem("nombres"),
               estadoLogin: parseInt(sessionStorage.getItem("estadoLogin")),
-              id: sessionStorage.getItem("id")
+              id: sessionStorage.getItem("id"),
+              identificacion: sessionStorage.getItem("identificacion")
           }
-          console.log(sesionUsuario);
-          console.log(usuario);
           setUsuario(sesionUsuario);
       } else {
           setUsuario({nombres: "", estadoLogin: EstadosLogin.NO_LOGIN});
@@ -31,6 +30,22 @@ const Sidebar = () => {
     sessionStorage.clear();
     revisarSesion();
     navigateTo("/");
+  }
+
+  const editarDatos = () => {
+    revisarSesion();
+    // const id = sessionStorage.getItem("id");
+    navigateTo("/clientes/form/" + usuario.id);
+  }
+
+  const listarTickets = () => {
+    revisarSesion();
+    navigateTo("/ticketscliente");
+  }
+
+  const crearTicket = () => {
+    revisarSesion();
+    navigateTo("/clienteticketform")
   }
 
   useEffect(() => {
@@ -65,9 +80,9 @@ const Sidebar = () => {
             :
             usuario.estadoLogin === EstadosLogin.CLIENTE_LOGIN ? (
               <ul className="list-unstyled">
-                <li><a href={"/clientes/form/" + usuario.id} type="button" className="btn btn-md btn-warning mt-3 mb-3">Editar datos</a></li>
-                <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Listar mis tickets</a></li>
-                <li><a href="/tablaclientes" type="button" className="btn btn-md btn-warning mt-3 mb-3">Crear un ticket</a></li>
+                <li><button onClick={editarDatos} type="button" className="btn btn-md btn-warning mt-3 mb-3">Editar datos</button></li>
+                <li><button onClick={listarTickets} type="button" className="btn btn-md btn-warning mt-3 mb-3">Listar mis tickets</button></li>
+                <li><button onClick={crearTicket} type="button" className="btn btn-md btn-warning mt-3 mb-3">Crear un ticket</button></li>
               </ul>
             )
             : (

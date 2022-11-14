@@ -33,8 +33,6 @@ const Landing = () => {
                 password: password
             };
             const result = await LoginServicios.clienteLogin(credenciales);
-            console.log(result);
-            console.log(usuario);
             const datosPerfil = {
                 id: result.data.id,
                 nombres: result.data.nombres,
@@ -43,7 +41,6 @@ const Landing = () => {
                 identificacion: result.data.identificacion,
                 estadoLogin: EstadosLogin.CLIENTE_LOGIN
             }
-            console.log(datosPerfil);
             crearSesion(datosPerfil);
             if (datosPerfil.estadoLogin === EstadosLogin.CLIENTE_LOGIN) {
                 navigateTo("/clienteDashboard");

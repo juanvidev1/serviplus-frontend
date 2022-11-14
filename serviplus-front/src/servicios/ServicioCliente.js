@@ -21,7 +21,7 @@ ClientesServicios.guardarCliente = (cliente) => {
 }
 
 ClientesServicios.actualizarCliente = (id, cliente) => {
-    return axios.put(baseURL + "/clientes" + id, cliente);
+    return axios.put(baseURL + "/clientes/" + id, cliente);
 }
 
 ClientesServicios.eliminarCliente = (id) => {
