@@ -25,7 +25,6 @@ function App() {
       <ContextoUsuario.Provider value={{usuario, setUsuario}}>
         <div className="App" >
         <Header />
-            
          <Routes>
            <Route path="/" element={<Landing />} exact></Route>
            <Route path="/clientes/form" element={<FormCliente />} exact></Route>
